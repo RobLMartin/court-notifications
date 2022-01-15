@@ -1,9 +1,8 @@
 import CaseTableRow from "../CaseTableRow/CaseTableRow";
 import DefendantTableRow from "../DefendantTableRow/DefendantTableRow";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
-
-import './ResultsTable.scss'
+import "./ResultsTable.scss";
 
 export default function ResultsTable({ state, dispatch }) {
   let caseRows = null;
@@ -11,11 +10,9 @@ export default function ResultsTable({ state, dispatch }) {
 
   const { t } = useTranslation();
 
-
   if (state.selectedDefendant !== null) {
-
-    let cases = state.cases.filter(item => {
-      return (item.defendant+'.'+item.dob === state.selectedDefendant);
+    let cases = state.cases.filter((item) => {
+      return item.defendant + "." + item.dob === state.selectedDefendant;
     });
 
     caseRows = cases[0].cases.map((courtCase, index) => (
@@ -32,10 +29,10 @@ export default function ResultsTable({ state, dispatch }) {
       <table className="usa-table usa-table--stacked">
         <thead>
           <tr>
-            <th scope="col">{t('casesTable.columns.courtDate')}</th>
-            <th scope="col">{t('casesTable.columns.caseNumber')}</th>
-            <th scope="col">{t('casesTable.columns.court')}</th>
-            <th scope="col">{t('casesTable.columns.room')}</th>
+            <th scope="col">{t("casesTable.columns.courtDate")}</th>
+            <th scope="col">{t("casesTable.columns.caseNumber")}</th>
+            <th scope="col">{t("casesTable.columns.court")}</th>
+            <th scope="col">{t("casesTable.columns.room")}</th>
           </tr>
         </thead>
         <tbody>{caseRows}</tbody>
@@ -48,16 +45,24 @@ export default function ResultsTable({ state, dispatch }) {
     return (
       <div>
         <p>
-          <b>{t('casesTable.description')} {df} </b>&nbsp;&nbsp;&nbsp;
-          <br/>
-           {t('casesTable.help')} <a href={computeFullSearchUrl(df)} target="_blank" rel="noreferrer">NC Courts</a>.
+          <b>
+            {t("casesTable.description")} {df}{" "}
+          </b>
+          &nbsp;&nbsp;&nbsp;
+          <br />
+          {t("casesTable.help")}{" "}
+          <a href={computeFullSearchUrl(df)} target="_blank" rel="noreferrer">
+            NC Courts
+          </a>
+          .
         </p>
         {populatedTable}
       </div>
     );
-
   } else {
-    const defendantRows = state.cases.map((courtCase, index) => (
+    const defendantRows = [
+      { defendant: "TEST", dob: "test", cases: [], caseNumber: 1 },
+    ].map((courtCase, index) => (
       <DefendantTableRow
         key={courtCase.caseNumber}
         index={index}
@@ -70,26 +75,28 @@ export default function ResultsTable({ state, dispatch }) {
       <table className="usa-table usa-table--stacked">
         <thead>
           <tr>
-            <th scope="col">{t('defendantsTable.columns.select')}</th>
-            <th scope="col">{t('defendantsTable.columns.defendant')}</th>
-            <th scope="col">{t('defendantsTable.columns.birthDate')}</th>
-            <th scope="col">{t('defendantsTable.columns.numberOfCases')}</th>
+            <th scope="col">{t("defendantsTable.columns.select")}</th>
+            <th scope="col">{t("defendantsTable.columns.defendant")}</th>
+            <th scope="col">{t("defendantsTable.columns.birthDate")}</th>
+            <th scope="col">{t("defendantsTable.columns.numberOfCases")}</th>
           </tr>
         </thead>
         <tbody>{defendantRows}</tbody>
       </table>
     );
-  
-    const emptyTable = (<div className="empty"><em>{t('casesTable.emptyTable')}</em></div>)
-    caseTable = (defendantRows && defendantRows.length > 0) ? populatedTable : emptyTable;
+
+    const emptyTable = (
+      <div className="empty">
+        <em>{t("casesTable.emptyTable")}</em>
+      </div>
+    );
+    caseTable =
+      defendantRows && defendantRows.length > 0 ? populatedTable : emptyTable;
     return (
       <div>
-        <p>
-          {t('select.description')}
-        </p>
+        <p>{t("select.description")}</p>
         {caseTable}
       </div>
     );
   }
-
 }

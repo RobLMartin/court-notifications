@@ -1,6 +1,6 @@
 import "./SignupForm.scss";
 import { subscribeToDefendant } from "../../scripts/appState";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 function createPhoneUpdater(dispatch) {
   return function updatePhone($event, param) {
@@ -22,7 +22,7 @@ export default function SignupForm({ state, dispatch }) {
       if (tphone.length !== 10) {
         dispatch({
           type: "phone-message",
-          value: { phone_message: t('signup.validations.isInvalid') },
+          value: { phone_message: t("signup.validations.isInvalid") },
         });
       } else {
         doit = true;
@@ -30,7 +30,7 @@ export default function SignupForm({ state, dispatch }) {
     } else {
       dispatch({
         type: "phone-message",
-        value: { phone_message: t('signup.validations.isBlank') },
+        value: { phone_message: t("signup.validations.isBlank") },
       });
     }
 
@@ -48,24 +48,29 @@ export default function SignupForm({ state, dispatch }) {
   let phoneMessageText = "";
 
   if (state.phone_message.length > 0) {
-    console.log('Phone message ' + state.phone_message);
+    console.log("Phone message " + state.phone_message);
     phoneMessageText = <div>&nbsp;&nbsp;&nbsp;{state.phone_message}</div>;
   }
 
-  const explanationText = (
-    <p>{t('signup.description')}</p>
-  );
+  const explanationText = <p>{t("signup.description")}</p>;
 
   let inputBox = (
-    <div className={`usa-form-group ${phoneMessageText ? 'usa-form-group--error': ''}`}>
-      <label className={`usa-label ${phoneMessageText ? 'usa-label--error' : ''}`} htmlFor="input-type-text">
-        {t('signup.fields.phoneNumber')}
+    <div
+      className={`usa-form-group ${
+        phoneMessageText ? "usa-form-group--error" : ""
+      }`}
+    >
+      <label
+        className={`usa-label ${phoneMessageText ? "usa-label--error" : ""}`}
+        htmlFor="input-type-text"
+      >
+        {t("signup.fields.phoneNumber")}
       </label>
       <span className="usa-error-message" id="input-error-message">
         {phoneMessageText}
       </span>
       <input
-        className={`usa-input ${phoneMessageText ? 'usa-input-error' : ''}`}
+        className={`usa-input ${phoneMessageText ? "usa-input-error" : ""}`}
         id="input-type-text"
         name="input-type-text"
         type="text"
@@ -77,16 +82,19 @@ export default function SignupForm({ state, dispatch }) {
 
   let signupButton = (
     <button type="button" className="usa-button" onClick={doSubscription}>
-      {t('signup.button')}
+      {t("signup.button")} test
     </button>
   );
 
   if (state.signupSuccess) {
     inputBox = (
-      <div><span className="usa-error-message" id="input-error-message">
-        {phoneMessageText}
-      </span></div>);
-      signupButton = "";
+      <div>
+        <span className="usa-error-message" id="input-error-message">
+          {phoneMessageText}
+        </span>
+      </div>
+    );
+    signupButton = "";
   }
 
   function unSelectDefendant() {
@@ -106,7 +114,7 @@ export default function SignupForm({ state, dispatch }) {
         onClick={() => unSelectDefendant()}
       >
         <i className="fa fa-chevron-left"></i>
-        {t('signup.previousList')}
+        {t("signup.previousList")}
       </button>
       {explanationText}
 

@@ -4,88 +4,88 @@
     "tips": "Tips"
   },
   "title": "Buncombe County Court Reminders Sign Up",
-    "description": "A project of Code for Asheville",
-    "languages": {
-        "english": "English",
-        "spanish": "Español",
-        "russian": "Русский"
-    },
-    "intro": {
-        "description": {
-            "paragraph1": "This site lets you sign up for text message reminders about upcoming criminal court dates in Buncombe County. It is free for use by anyone. Simply search for a name, select one of the resulting defendants, and provide a phone number that can receive text messages. Note: child support payment cases are not included here.",
-            "paragraph2": "The site is maintained by volunteers for the benefit of the community. It is intended to help people show up for court in Buncombe County, but no guarantee is made. Showing up for court remains your responsibility."
-        }
-    },
-    "search": {
-        "title": "Search For Your Cases",
-        "description": "Enter your first, middle and last name to search for your court cases. They will appear in a table below.",
-        "inputfields": {
-            "firstName" : "First Name (Optional)",
-            "middleName" : "Middle Name Or Initial (Optional)",
-            "lastName" : "Last Name"
-        },
-        "submitButton": "Submit",
-        "inProgress": "Search in progress",
-        "validations": {
-            "lastName": "A last name is required"
-        }
-    },
-    "select": {
-        "title": "Select a Defendant and Sign Up",
-        "description": "Defendants who match your search are listed below. Select one to sign up."
-    },
-    "casesTable": {
-      "description": "Cases for",
-      "help": "You may find details of charges on the NC Judicial Branch site",
-      "columns": {
-            "courtDate": "Court Date",
-            "caseNumber": "Case Number",
-            "court":   "Court",
-            "room":    "Room" 
-        },
-        "emptyTable" : "No results found"
-    },
-    "defendantsTable": {
-        "columns": {
-          "select": "Select",
-          "defendant": "Defendant",
-          "birthDate": "Date of Birth",
-          "numberOfCases": "Number of Cases"
-        }
-    },
-    "signup": {
-        "title": "Sign Up for Case Reminders for",
-        "description": "Enter your cell phone to subscribe to text message reminders of any Buncombe County court dates for this defendant. You will receive two reminders, one a week in advance and one a couple days before the court date.",
-        "previousList": "Return to all defendents",
-        "fields": {
-            "phoneNumber": "Cell Phone Number"
-        }, 
-        "validations": {
-            "isBlank": "Phone number cannot be blank",
-            "isInvalid": "Not a valid phone number"
-        },
-        "button": "Sign Up for Notifications"
-    },
-    "courtguide": {
-      "intro": "Failing to appear in court can result in an order for arrest and financial penalty. Here are some things to remember as your court date approaches:",
-      "item1": "Arrive at the Buncombe County Courthouse, 60 Court Plaza in Asheville, 30 minutes before your scheduled court session.",
-      "item2": "Paid parking is available at Buncombe County parking deck across the street from the courthouse, at 164 College Street.",
-      "item3": "A security checkpoint is located at the courthouse entrance. All persons must have their bags scanned and pass through a metal detector.",
-      "item4": "Make the necessary arrangements ahead of time so you can be present for court.",
-      "item5": "Dress respectfully.",
-      "item6": "You are responsible for appearing to all court dates. Be sure to know all of your court dates for any pending charges you have.",
-      "if-miss": "If you miss your court date, contact your lawyer immediately.",
-      "pd-phone": "Office of the Public Defender: (828) 259-3423",
-      "da-phone": "District Attorney’s Office: (828) 259-3410",
-      "clerk-phone": "Clerk of Superior Court: (828) 259-3400"
-    },
-    "unsubscribe": {
-      "intro": "Enter your phone number below to unsubscribe from all notifications. You will receive a text message asking you to confirm. To complete the action you must reply YES.",
-      "button": "Unsubscribe Phone Number"
-    },
-    "footer": {
-      "contact": "Contact us",
-      "privacy-policy": "Privacy policy",
-      "github": "Github"
+  "description": "A project of Code for Asheville",
+  "languages": {
+    "english": "English",
+    "spanish": "Español",
+    "russian": "Русский"
+  },
+  "intro": {
+    "description": {
+      "paragraph1": "This site lets you sign up for text message reminders about upcoming criminal court dates in Buncombe County. It is free for use by anyone. Simply search for a name, select one of the resulting defendants, and provide a phone number that can receive text messages. Note: child support payment cases are not included here.",
+      "paragraph2": "The site is maintained by volunteers for the benefit of the community. It is intended to help people show up for court in Buncombe County, but no guarantee is made. Showing up for court remains your responsibility."
     }
+  },
+  "search": {
+    "title": "Search For Your Cases",
+    "description": "Enter your first, middle and last name to search for your court cases. They will appear in a table below.",
+    "inputfields": {
+      "firstName": "First Name (Optional)",
+      "middleName": "Middle Name Or Initial (Optional)",
+      "lastName": "Last Name"
+    },
+    "submitButton": "Submit",
+    "inProgress": "Search in progress",
+    "validations": {
+      "lastName": "A last name is required"
+    }
+  },
+  "select": {
+    "title": "Select a Defendant and Sign Up",
+    "description": "Defendants who match your search are listed below. Select one to sign up."
+  },
+  "casesTable": {
+    "description": "Cases for",
+    "help": "You may find details of charges on the NC Judicial Branch site",
+    "columns": {
+      "courtDate": "Court Date",
+      "caseNumber": "Case Number",
+      "court": "Court",
+      "room": "Room"
+    },
+    "emptyTable": "No results found"
+  },
+  "defendantsTable": {
+    "columns": {
+      "select": "Select",
+      "defendant": "Defendant",
+      "birthDate": "Date of Birth",
+      "numberOfCases": "Number of Cases"
+    }
+  },
+  "signup": {
+    "title": "Sign Up for Case Reminders for",
+    "description": "Enter your cell phone to subscribe to text message reminders of any Buncombe County court dates for this defendant. You will receive two reminders, one a week in advance and one a couple days before the court date.",
+    "previousList": "Return to all defendents",
+    "fields": {
+      "phoneNumber": "Cell Phone Number"
+    },
+    "validations": {
+      "isBlank": "Phone number cannot be blank",
+      "isInvalid": "Not a valid phone number"
+    },
+    "button": "Sign Up for Notifications"
+  },
+  "courtguide": {
+    "intro": "Failing to appear in court can result in an order for arrest and financial penalty. Here are some things to remember as your court date approaches:",
+    "item1": "Arrive at the Buncombe County Courthouse, 60 Court Plaza in Asheville, 30 minutes before your scheduled court session.",
+    "item2": "Paid parking is available at Buncombe County parking deck across the street from the courthouse, at 164 College Street.",
+    "item3": "A security checkpoint is located at the courthouse entrance. All persons must have their bags scanned and pass through a metal detector.",
+    "item4": "Make the necessary arrangements ahead of time so you can be present for court.",
+    "item5": "Dress respectfully.",
+    "item6": "You are responsible for appearing to all court dates. Be sure to know all of your court dates for any pending charges you have.",
+    "if-miss": "If you miss your court date, contact your lawyer immediately.",
+    "pd-phone": "Office of the Public Defender: (828) 259-3423",
+    "da-phone": "District Attorney’s Office: (828) 259-3410",
+    "clerk-phone": "Clerk of Superior Court: (828) 259-3400"
+  },
+  "unsubscribe": {
+    "intro": "Enter your phone number below to unsubscribe from all notifications. You will receive a text message asking you to confirm. To complete the action you must reply YES.",
+    "button": "Unsubscribe Phone Number"
+  },
+  "footer": {
+    "contact": "Contact us",
+    "privacy-policy": "Privacy policy",
+    "github": "Github"
+  }
 }

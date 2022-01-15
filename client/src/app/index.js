@@ -9,10 +9,15 @@ import ResultsTable from "./components/ResultsTable/ResultsTable";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 import Intro from "./components/Intro/Intro";
-import Tips from "./components/Tips/Tips";
-import Unsubscribe from "./components/Unsubscribe/Unsubscribe";
+// import Tips from "./components/Tips/Tips";
 import stepper from "./scripts/stepper";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AppLayout, Canvas } from "./components";
+import Home from "../home";
+import SignUp from "../sign.up";
+import Search from "../search";
+import CaseList from "../case.list";
+import Tips from "../tips";
 
 const initialState = {
   language: "en",
@@ -29,7 +34,7 @@ const initialState = {
   searchErrorMessage: "",
   searchSubmitted: false,
   searchInProgress: false,
-  searchReturned: false,
+  searchReturned: true,
 };
 
 function reducer(state, action) {
@@ -94,31 +99,29 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   return (
     <Router>
-      <div className="App">
-        <Header state={state} dispatch={dispatch} />
-        <Switch>
-          <Route path="/unsubscribe">
-            <Unsubscribe state={state} dispatch={dispatch} />
-          </Route>
-          <Route path="/unsubscribe">
-            <Unsubscribe state={state} dispatch={dispatch} />
-          </Route>
-          <Route path="/tips">
-            <Tips />
-          </Route>
-          <Route exact={true} path="/">
-            <Home state={state} dispatch={dispatch} />
-          </Route>
-        </Switch>
-      </div>
+      {/* <Header state={state} dispatch={dispatch} /> */}
+      <AppLayout>
+        <Canvas>
+          <Routes>
+            <Route path="/tips" element={<Tips />} />
+            <Route
+              path="/"
+              element={<Home state={state} dispatch={dispatch} />}
+            />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/case-list/:id" element={<CaseList />} />
+          </Routes>
+        </Canvas>
+      </AppLayout>
     </Router>
   );
 }
 
-function Home({ state, dispatch }) {
+function Home2({ state, dispatch }) {
+  console.log(state);
   const { t } = useTranslation();
   const step1 = useRef(null);
   const step2 = useRef(null);
@@ -147,6 +150,7 @@ function Home({ state, dispatch }) {
       </li>
     );
   }
+
   return (
     <div>
       <Intro />
