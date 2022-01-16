@@ -1,7 +1,7 @@
 import "./Unsubscribe.scss";
 import Footer from "../Footer";
 import { unsubscribe } from "../../scripts/appState";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 function createPhoneUpdater(dispatch) {
   return function updatePhone($event, param) {
@@ -12,7 +12,7 @@ function createPhoneUpdater(dispatch) {
 function UnsubscribeForm({ state, dispatch }) {
   const updatePhone = createPhoneUpdater(dispatch);
   const { t } = useTranslation();
-//  dispatch({ type: "phone-message", value: { phone_message: "" } });
+  //  dispatch({ type: "phone-message", value: { phone_message: "" } });
 
   async function doUnsubscribe() {
     let doit = false;
@@ -24,7 +24,7 @@ function UnsubscribeForm({ state, dispatch }) {
       if (tphone.length !== 10) {
         dispatch({
           type: "phone-message",
-          value: { phone_message: t('signup.validations.isInvalid') },
+          value: { phone_message: t("signup.validations.isInvalid") },
         });
       } else {
         doit = true;
@@ -32,7 +32,7 @@ function UnsubscribeForm({ state, dispatch }) {
     } else {
       dispatch({
         type: "phone-message",
-        value: { phone_message: t('signup.validations.isBlank') },
+        value: { phone_message: t("signup.validations.isBlank") },
       });
     }
 
@@ -49,29 +49,34 @@ function UnsubscribeForm({ state, dispatch }) {
 
   let phoneMessageText = "";
 
-  if (state.phone_message.length > 0) {
-    console.log('Phone message ' + state.phone_message);
+  if (state?.phone_message?.length > 0) {
+    console.log("Phone message " + state.phone_message);
     phoneMessageText = <div>&nbsp;&nbsp;&nbsp;{state.phone_message}</div>;
   }
 
-  const explanationText = (
-    <p>{t('unsubscribe.intro')}</p>
-  );
+  const explanationText = <p>{t("unsubscribe.intro")}</p>;
 
   let inputBox = (
-    <div className={`usa-form-group ${phoneMessageText ? 'usa-form-group--error': ''}`}>
-      <label className={`usa-label ${phoneMessageText ? 'usa-label--error' : ''}`} htmlFor="input-type-text">
-        {t('signup.fields.phoneNumber')}
+    <div
+      className={`usa-form-group ${
+        phoneMessageText ? "usa-form-group--error" : ""
+      }`}
+    >
+      <label
+        className={`usa-label ${phoneMessageText ? "usa-label--error" : ""}`}
+        htmlFor="input-type-text"
+      >
+        {t("signup.fields.phoneNumber")}
       </label>
       <span className="usa-error-message" id="input-error-message">
         {phoneMessageText}
       </span>
       <input
-        className={`usa-input ${phoneMessageText ? 'usa-input-error' : ''}`}
+        className={`usa-input ${phoneMessageText ? "usa-input-error" : ""}`}
         id="input-type-text"
         name="input-type-text"
         type="text"
-        value={state.phone_number}
+        value={state?.phone_number}
         onChange={(e) => updatePhone(e, "phone_number")}
       />
     </div>
@@ -79,10 +84,10 @@ function UnsubscribeForm({ state, dispatch }) {
 
   let unsubscribeButton = (
     <button type="button" className="usa-button" onClick={doUnsubscribe}>
-      {t('unsubscribe.button')}
+      {t("unsubscribe.button")}
     </button>
   );
-  
+
   return (
     <div>
       {explanationText}
@@ -92,7 +97,7 @@ function UnsubscribeForm({ state, dispatch }) {
         {unsubscribeButton}
       </form>
     </div>
-  )
+  );
 }
 
 export default function Unsubscribe({ state, dispatch }) {
@@ -102,9 +107,8 @@ export default function Unsubscribe({ state, dispatch }) {
     <div>
       <div className="usa-prose">
         <UnsubscribeForm state={state} dispatch={dispatch} />
-
       </div>
-      <Footer/>
+      <Footer />
     </div>
-  )
+  );
 }

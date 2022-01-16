@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import TextField from "@mui/material/TextField";
 
-export default function SignUp() {
+export default function Unsubscribe() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -22,14 +22,14 @@ export default function SignUp() {
         </Button>
       </SideBySide>
       <Typography gutterBottom variant="h4">
-        {t("signup.title")}
+        Unsubscribe
       </Typography>
 
-      <Typography gutterBottom>{t("signup.description")}</Typography>
+      <Typography gutterBottom>{t("unsubscribe.intro")}</Typography>
 
       <SideBySide>
         <TextField label={t("signup.fields.phoneNumber")} type="phone" />
-        <Button variant="contained">{t("signup.button")}</Button>
+        <Button variant="contained">{t("unsubscribe.button")}</Button>
       </SideBySide>
     </Paper>
   );

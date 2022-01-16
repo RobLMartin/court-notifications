@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 export default styled.div`
   display: grid;
+  grid-template-areas: "topbar" "canvas" "footer";
+  grid-template-rows: 64px 1fr 55px;
+
   place-content: center;
   width: 100vw;
-  height: calc(100vh - 0px);
-
-  background: #f0f0f0;
+  height: 100vh;
 `;

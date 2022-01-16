@@ -1,21 +1,21 @@
-import i18next from 'i18next';
+import i18next from "i18next";
 
 // Grab a reference to localStorage when the app boots
 const localStorage = window.localStorage;
 
 function trimmedName(state) {
-  const firstName = state.firstName && state.firstName.trim()
-  const lastName = state.lastName && state.lastName.trim()
-  const middleName = state.middleName && state.middleName.trim()
+  const firstName = state.firstName && state.firstName.trim();
+  const lastName = state.lastName && state.lastName.trim();
+  const middleName = state.middleName && state.middleName.trim();
 
-  return { firstName, middleName, lastName }
+  return { firstName, middleName, lastName };
 }
 
 /**
  * Helper function to fetch stored case data from local
  * storage by a name string for a given person
- * @param {string} fullName 
- * @returns 
+ * @param {string} fullName
+ * @returns
  */
 function getPersonFromStorage(fullName) {
   return JSON.parse(localStorage.getItem(fullName));
@@ -23,8 +23,8 @@ function getPersonFromStorage(fullName) {
 
 /**
  * Gets the cases for the name string stored locally
- * @param {string} fullName 
- * @param {[*]} state 
+ * @param {string} fullName
+ * @param {[*]} state
  */
 function setPersonInStorage(fullName, state) {
   localStorage.setItem(fullName, JSON.stringify(state));
@@ -63,7 +63,6 @@ export function openCourtNotificationSite() {
   );
 }
 
-
 /**
  * For a given person, update a specific court case. It
  * will identify the case by its caseNumber.
@@ -91,8 +90,8 @@ export function updateStoredCourtCase(state, courtCase) {
  * @returns {string}
  */
 export function getCSVFullName(state) {
-  const { firstName, middleName, lastName } = trimmedName(state)
-  
+  const { firstName, middleName, lastName } = trimmedName(state);
+
   // I'm doing this so I don't have to think about
   // a trailing comma or null state when I combine the names
   const middle = middleName ? `,${middleName}` : "";
@@ -103,20 +102,20 @@ export function getCSVFullName(state) {
 /**
  * Fetch the case data from the server for the search terms,
  * and merge with any data stored locally
- * @param {*} state 
+ * @param {*} state
  * @returns {[*]} Returns an array of case data
  */
 export async function getCaseData(state) {
   const fullName = getCSVFullName(state);
   const storedCases = getPersonFromStorage(fullName);
 
-  const url = "/api/court-search?lng="+i18next.language;
+  const url = "/api/court-search?lng=" + i18next.language;
   const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({...state, ...trimmedName(state)}),
+    body: JSON.stringify({ ...state, ...trimmedName(state) }),
   });
 
   const newCases = await response.json();
@@ -129,15 +128,15 @@ export async function getCaseData(state) {
 }
 
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export async function subscribeToDefendant(state) {
-  const filteredCases = state.cases.filter(item => {
-    return (item.defendant+'.'+item.dob === state.selectedDefendant);
+  const filteredCases = state.cases.filter((item) => {
+    return item.defendant + "." + item.dob === state.selectedDefendant;
   });
-  const url = "/api/subscribe-to-defendant?lng="+i18next.language;
-  console.log('URL to subscribe ' + url);
+  const url = "/api/subscribe-to-defendant?lng=" + i18next.language;
+  console.log("URL to subscribe " + url);
   let response = await fetch(url, {
     method: "POST",
     headers: {
@@ -147,36 +146,64 @@ export async function subscribeToDefendant(state) {
       selectedDefendant: state.selectedDefendant,
       phone_number: state.phone_number,
       details: filteredCases[0],
-    })
+    }),
   });
   let result = await response.json();
-  if (result.code !== 200) { // Immediate error
-    console.log('Immediate error in subscription: ' + JSON.stringify(result));
+  if (result.code !== 200) {
+    // Immediate error
+    console.log("Immediate error in subscription: " + JSON.stringify(result));
     return result;
   }
   const index = result.index;
-  const checkUrl = "/api/check-subscription?index="+index+"&lng="+i18next.language;
+  const checkUrl =
+    "/api/check-subscription?index=" + index + "&lng=" + i18next.language;
   const SLEEP_INTERVAL = 500; // How long to sleep between attempts
   const MAX_ATTEMPTS = 6;
 
-  let signupStatus = { message: 'Signup timed out. Please try again later.' };
+  let signupStatus = { message: "Signup timed out. Please try again later." };
   for (let i = 0; i < MAX_ATTEMPTS; i++) {
     await sleep(SLEEP_INTERVAL);
-    response = await fetch(checkUrl, { method: "GET", headers: { "Content-Type": "application/json" }});
+    response = await fetch(checkUrl, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
     // Note: .json() returns a promise because the response returns as soon
     // as all headers have arrived. Calling .json() gets you another promise
     // for the body of the http response that is yet to be loaded.
     result = await response.json();
 
     // Status will be confirmed, pending or failed
-    if (result.status === 'confirmed') {
-      signupStatus = { message: 'Signup successful!' };
+    if (result.status === "confirmed") {
+      signupStatus = { message: "Signup successful!" };
       break;
     }
-    if (result.status === 'failed') {
-      signupStatus = { message: 'Signup unsuccessful - ' + result.errormessage };
+    if (result.status === "failed") {
+      signupStatus = {
+        message: "Signup unsuccessful - " + result.errormessage,
+      };
       break;
     }
   }
   return Promise.resolve(signupStatus);
+}
+
+export async function unsubscribe(state) {
+  const url = "/api/unsubscribe?lng=" + i18next.language;
+  let response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      phone_number: state.phone_number,
+    }),
+  });
+  console.log(response);
+  let result = await response.json();
+  console.log(JSON.stringify(result));
+  if (result.code !== 200) {
+    // Immediate error
+    console.log("Immediate error unsubscribing: " + JSON.stringify(result));
+  }
+  return Promise.resolve({ message: result.message });
 }

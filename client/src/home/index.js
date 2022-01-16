@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
+import { Paper } from "../app/components";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -13,7 +15,7 @@ export default function Home() {
   const handleNavigateToTips = () => navigate("/tips");
 
   return (
-    <>
+    <Paper>
       <Typography variant="h4" gutterBottom>
         Court Notifications
       </Typography>
@@ -35,7 +37,7 @@ export default function Home() {
           Search
         </Button>
       </AlignRight>
-    </>
+    </Paper>
   );
 }
 

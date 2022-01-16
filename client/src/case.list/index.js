@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
+import { Paper } from "../app/components";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -19,7 +20,7 @@ export default function SignUp() {
   const handleNavigateToSignUp = () => navigate("/sign-up");
 
   return (
-    <>
+    <Paper>
       <SideBySide>
         <Button startIcon={<ChevronLeftIcon />} onClick={handleBackToSearch}>
           Back to search
@@ -29,7 +30,7 @@ export default function SignUp() {
         {t("select.title")}
       </Typography>
       <Typography gutterBottom>{t("select.description")}</Typography>
-      <Table sx={{ width: "900px" }}>
+      <Table>
         <TableHead>
           <TableRow>
             <TableCell>Case #</TableCell>
@@ -64,7 +65,7 @@ export default function SignUp() {
           )}
         </TableBody>
       </Table>
-    </>
+    </Paper>
   );
 }
 

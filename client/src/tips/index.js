@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
+import { Paper } from "../app/components";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -8,7 +11,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import Alert from "@mui/material/Alert";
-import { useNavigate } from "react-router-dom";
 
 export default function Tips() {
   const { t } = useTranslation();
@@ -16,7 +18,7 @@ export default function Tips() {
 
   const handleNavigateToHome = () => navigate("/");
   return (
-    <>
+    <Paper>
       <SideBySide>
         <Button startIcon={<ChevronLeftIcon />} onClick={handleNavigateToHome}>
           Return Home
@@ -61,7 +63,7 @@ export default function Tips() {
           <ListItem>{t("courtguide.clerk-phone")}</ListItem>
         </List>
       </Alert>
-    </>
+    </Paper>
   );
 }
 

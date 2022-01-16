@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+import { Paper } from "../app/components";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -13,7 +14,7 @@ export default function Search() {
   const handleNavigateToCaseList = () => navigate("/case-list/123");
 
   return (
-    <>
+    <Paper>
       <Typography gutterBottom variant="h4">
         {t("search.title")}
       </Typography>
@@ -28,7 +29,7 @@ export default function Search() {
           </Button>
         </AlignRight>
       </Content>
-    </>
+    </Paper>
   );
 }
 
